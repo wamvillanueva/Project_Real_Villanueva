@@ -15,11 +15,12 @@ const string problem[]=
         "Large Sum\n", "Longest Collatz Sequence\n" ,
         "Diophantine Reciprocals\n", "Power Digit Sum\n",
         "Number Letter Counts\n", "Maximum Path Sum I\n" ,
-        "Counting Sundays\n", "Factorial Digit Sum\n", "Name Scores\n\n",
+        "Counting Sundays\n", "Factorial Digit Sum\n", "Name Scores\n",
+        "1000-digit Fibonacci Number\n", "Truncatable Primes\n\n",
         "EXIT\n"
     };
 
-const int NUM_PROBLEMS=21;
+const int NUM_PROBLEMS=23;
 const int EXIT=NUM_PROBLEMS+1;
 
 int main()
@@ -125,6 +126,14 @@ int main()
 
             case 21:
                 proj.name_scores();
+                break;
+
+            case 22:
+                proj.first_1000_digit_fibonacci();
+                break;
+
+            case 23:
+                proj.truncatable_primes();
                 break;
 
             case EXIT:

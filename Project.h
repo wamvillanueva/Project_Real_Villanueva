@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include "math.h"
 #ifndef PROJECT_H
 #define PROJECT_H
 
@@ -51,10 +52,13 @@ class Project
 
         void name_scores();
 
+        void first_1000_digit_fibonacci();
+        void truncatable_primes();
+
     protected:
 
     private:
-
+        void z_truncatable_primes();
 };
 
 #endif // PROJECT_H

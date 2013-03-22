@@ -12,12 +12,16 @@
 #define Limit 1000
 #include <list>
 #include <algorithm>
+#define sz 1000001
+#define mx 1001
 
 using namespace std;
 
 vector<int> primes;
 int day,month,year;
 bool composite[Maximum + 1];
+bool p[sz];
+long primeTable[78500],nPrime = 0;
 
 Project::Project()
 {
@@ -782,4 +786,111 @@ void Project::name_scores()
     sort(names.begin(), names.end());
     cout <<"The total name scores is: "<< getTotalScore(names) << endl;
 }
+int nthTerm=3;
+float term1=1;
+float term2=1;
+float term3=term1+term2;
+float numDigit1=0;
+float numDigit2=0;
+float numDigit3=0;
 
+void TrickTerm(){
+    term1=term2;
+    term2=term3;
+    numDigit1=numDigit2;
+    numDigit2=numDigit3;
+    if(numDigit1==numDigit2)
+        term3 = term1 + term2;
+    else if(numDigit2 > numDigit1)
+        term3=(term1/10) + term2;
+    while(term3>10){
+        term3=term3/10;
+        numDigit3++;
+    }
+    nthTerm++;
+}
+int numDigits (int n);
+void Project::first_1000_digit_fibonacci(){
+    while(numDigit3+1 < 1000)
+        TrickTerm();
+    cout<< "The first 1000 digit fibonacci number is: " <<nthTerm<<endl;
+}
+
+int numDigits(int n) {
+    int digits = 0;
+    if(n < 0)
+        n = -n;
+    while(n > 0) {
+        digits++;
+        n /= 10;
+    }
+    return digits;
+}
+
+
+
+void Project::z_truncatable_primes()
+{
+    int i,j;
+
+    p[0] = p[1] = true;
+    for( i = 4; i <= sz; i += 2 )
+        p[i] = true;
+
+    primeTable[nPrime++] = 2;
+
+    for( i = 3; i <= mx; i += 2 )
+    {
+        if(!p[i])
+        {
+            primeTable[nPrime++] = i;
+            for( j = i * i; j <= sz; j += i )
+                p[j] = true;
+        }
+    }
+
+    for( i = mx + 2; i <= sz; i += 2 )
+    {
+        if(!p[i])
+        {
+            primeTable[nPrime++] = i;
+        }
+    }
+}
+
+bool isTruncatable(long n)
+{
+    long pow = 10;
+
+    while( pow < n)
+    {
+        if(p[n%pow] || p[n/pow])
+            return false;
+        pow *= 10;
+    }
+
+    return true;
+}
+
+
+void Project::truncatable_primes()
+{
+    long i,ans = 0;
+
+    z_truncatable_primes();
+
+    for( i = 4; i < nPrime; i++)
+    {
+        if( isTruncatable(primeTable[i]) )
+        {
+            ans += primeTable[i];
+
+        }
+    }
+
+    cout<<"TheThe sum of first 11 truncatable primes is: " << ans<<endl;
+
+
+
+
+}
